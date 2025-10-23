@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="landing-page.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <img src="../images/logo.png" alt="WUP Logo" class="nav-logo" onclick="location.href='index.html'">
+   <button class="burger-icon">&#9776;</button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="landing-container">
+    <h2 class="greeting">Hello, <span class="username">USER</span></h2>
+
+    <section class="card teal" onclick="location.href='create-report.html'">
+      <img src="../images/report.png" alt="Create Report" class="card-icon">
+      <div class="card-text">
+        <h3>Create A Report</h3>
+        <p>Report a lost & found item to help it get back to its owner.</p>
+      </div>
+    </section>
+
+    <section class="card cream" onclick="location.href='browse-reports.html'">
+      <img src="../images/browse.png" alt="Browse Reports" class="card-icon">
+      <div class="card-text">
+        <h3>Browse Reported Items</h3>
+        <p>Lost an item? Check out reported lost & found items here!</p>
+      </div>
+    </section>
+
+    <section class="card white" onclick="location.href='lost-item-report.html'">
+      <img src="../images/lost.png" alt="Lost Item Report" class="card-icon">
+      <div class="card-text">
+        <h3>Lost Item Report</h3>
+        <p>Missing an item? Create a Lost Item Report to help the search.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -19,16 +19,17 @@ body {
 
 /* Navbar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: #ffcd38;
-  padding: 0.8rem 2rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+
 .wup-logo {
-  height: 40px;
+  height: 50px;
   width: auto;
 }
 
