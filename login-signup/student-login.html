@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login | WUP Lost and Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html">
+  <img src="../images/logo.png" alt="WUP Logo" class="wup-logo">
+</a>
+  </nav>
+
+  <!-- Login Layout -->
+  <main class="login-container">
+    <div class="login-wrapper">
+      <img src="../images/student-logo.png" alt="Graduation Cap" class="login-icon">
+      <h2>Student Log in</h2>
+      <p class="login-description">Kindly provide the required information to access your account.</p>
+
+      <div class="login-card">
+        <form>
+          <input type="email" placeholder="Institutional Email" required>
+          <input type="password" id="password" placeholder="Password" required>
+          <label class="show-password">
+            <input type="checkbox" onclick="togglePassword()"> Show Password
+          </label>
+          <button type="submit" class="btn">Login</button>
+        </form>
+      </div>
+
+      <p class="signup-text">
+        Not yet registered? <a href="student-signup.html">Sign Up here</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    function togglePassword() {
+      const pass = document.getElementById("password");
+      pass.type = pass.type === "password" ? "text" : "password";
+    }
+  </script>
+</body>
+</html>
