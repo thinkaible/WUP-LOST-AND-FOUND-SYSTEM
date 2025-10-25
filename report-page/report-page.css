@@ -1,0 +1,160 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f2faff;
+  color: #1d1d1d;
+}
+
+/* navabr */
+.navbar {
+  background-color: #ffcd38;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.nav-logo {
+  height: 50px;
+  cursor: pointer;
+}
+
+.burger-icon {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+/* main */
+.report-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.horse-logo {
+  height: 70px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+/* tabs */
+.form-tabs {
+  display: flex;
+  width: 38.6%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  border: none;
+  padding: 15px 0;
+  border-radius: 25px 25px 0 0;
+  cursor: pointer;
+  background-color: #fff;
+  color: #008c99;
+  transition: all 0.3s ease;
+}
+
+.tab.active {
+  background-color: #008c99;
+  color: #fff;
+  box-shadow: none;
+}
+
+/* form card */
+.form-card {
+  background-color: #008c99;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+  width: 90%;
+  max-width: 600px; 
+  padding: 40px 30px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card .form-tabs {
+  border-radius: 25px 25px 0 0;
+}
+
+.form-card form {
+  width: 100%;
+}
+
+/* forms */
+.form {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  transition: all 0.3s ease;
+}
+
+.form.active {
+  display: flex;
+}
+
+.form input {
+  border: 1.5px solid #ffffff;
+  border-radius: 10px;
+  padding: 12px 15px;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+}
+
+.form input::placeholder {
+  color: #dceff0;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  background-color: #ffcd38;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: scale(1.05);
+}
+
+/* slide anim para di putol maglipat ng formm */
+.slide-in {
+  animation: slideIn 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

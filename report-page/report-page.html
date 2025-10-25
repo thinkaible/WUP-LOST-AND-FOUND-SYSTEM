@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report Page</title>
+  <link rel="stylesheet" href="report-page.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- navbar -->
+  <header class="navbar">
+    <img src="../images/logo.png" alt="WUP Logo" class="nav-logo" onclick="location.href='index.html'">
+    <button class="burger-icon">&#9776;</button>
+  </header>
+
+  <!-- main contiainer -->
+  <main class="report-container">
+    <div class="header">
+      <img src="../images/horse.png" alt="Horse Logo" class="horse-logo">
+      <h2 id="form-title">REPORT ITEM FORM</h2>
+    </div>
+
+    <div class="form-tabs">
+      <button id="lost-tab" class="tab active" onclick="switchForm('lost')">LOST ITEM</button>
+      <button id="found-tab" class="tab" onclick="switchForm('found')">FOUND ITEM</button>
+    </div>
+
+    <div class="form-card">
+      <!-- LOST ITEM FORM -->
+      <form id="lost-form" class="form active" onsubmit="handleSubmit(event, 'lost')">
+        <input type="text" placeholder="Item Name" required>
+        <input type="text" placeholder="Color" required>
+        <input type="text" placeholder="Description" required>
+        <input type="text" placeholder="Last Known Location" required>
+        <button type="submit" class="submit-btn">Submit Report</button>
+      </form>
+
+      <!-- FOUND ITEM FORM -->
+      <form id="found-form" class="form" onsubmit="handleSubmit(event, 'found')">
+        <input type="text" placeholder="Item Name" required>
+        <input type="text" placeholder="Color" required>
+        <input type="text" placeholder="Description" required>
+        <input type="text" placeholder="Location Found" required>
+        <input type="text" placeholder="Department Surrendered" required>
+        <button type="submit" class="submit-btn">Submit Report</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    function switchForm(type) {
+      const lostForm = document.getElementById("lost-form");
+      const foundForm = document.getElementById("found-form");
+      const lostTab = document.getElementById("lost-tab");
+      const foundTab = document.getElementById("found-tab");
+      const formTitle = document.getElementById("form-title");
+
+      // switch active tab and title
+      if (type === "lost") {
+        lostForm.classList.add("active", "slide-in");
+        foundForm.classList.remove("active", "slide-in");
+        lostTab.classList.add("active");
+        foundTab.classList.remove("active");
+        formTitle.textContent = "REPORT ITEM FORM";
+      } else {
+        foundForm.classList.add("active", "slide-in");
+        lostForm.classList.remove("active", "slide-in");
+        foundTab.classList.add("active");
+        lostTab.classList.remove("active");
+        formTitle.textContent = "LOST ITEM FORM";
+      }
+    }
+
+    function handleSubmit(event, type) {
+      event.preventDefault();
+      const inputs = event.target.querySelectorAll("input");
+      const data = {};
+      inputs.forEach((input) => {
+        data[input.placeholder] = input.value;
+      });
+      console.log(`${type.toUpperCase()} ITEM REPORT:`, data);
+      alert("Form submitted! (Check console for data)");
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
