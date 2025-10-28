@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="login-style.css">
 </head>
 <body>
-  <!-- Navbar -->
   <nav class="navbar">
     <a href="../index.html">
       <img src="../images/logo.png" alt="WUP Logo" class="wup-logo">
@@ -16,7 +15,6 @@
     <button class="menu-btn">&#9776;</button>
   </nav>
 
-  <!-- Signup Layout -->
   <main class="login-container">
     <div class="login-wrapper">
       <img src="../images/student-logo.png" alt="Graduation Cap" class="login-icon">
@@ -24,13 +22,13 @@
       <p class="login-description">Kindly provide the required information to register your account.</p>
 
       <div class="login-card">
-        <form>
-          <input type="text" placeholder="Name" required>
-          <input type="text" placeholder="Student ID Number" required>
-          <input type="email" placeholder="Institutional Email" required>
-          <input type="password" placeholder="Password" required>
-          <input type="text" placeholder="Contact Number" required>
-          <input type="text" placeholder="Year Level and Block" required>
+        <form id="student-signup-form">
+          <input type="text" name="Name" placeholder="Name" required>
+          <input type="text" name="Student ID Number" placeholder="Student ID Number" required>
+          <input type="email" name="Institutional Email" placeholder="Institutional Email" required>
+          <input type="password" name="Password" placeholder="Password" required>
+          <input type="text" name="Contact Number" placeholder="Contact Number" required>
+          <input type="text" name="Year Level and Block" placeholder="Year Level and Block" required>
           <button type="submit" class="btn">Sign Up</button>
         </form>
       </div>
@@ -40,5 +38,22 @@
       </p>
     </div>
   </main>
+
+  <script>
+    document.addEventListener("input", (event) => {
+      if (event.target.tagName === "INPUT") {
+        console.log(`Input Changed → ${event.target.placeholder}: ${event.target.value}`);
+      }
+    });
+
+    document.getElementById("student-signup-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = {};
+      new FormData(event.target).forEach((v, k) => data[k] = v);
+      console.log("STUDENT SIGNUP FORM SUBMITTED:", data);
+      alert("Form submitted! (Check console for data)");
+      event.target.reset();
+    });
+  </script>
 </body>
 </html>
