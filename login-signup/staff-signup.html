@@ -9,10 +9,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <a href="../index.html">
-      <img src="../images/logo.png" alt="WUP Logo" class="wup-logo">
-    </a>
-    <button class="menu-btn">&#9776;</button>
+    <a href="../index.html"><img src="../images/logo.png" alt="WUP Logo" class="wup-logo"></a>
   </nav>
 
   <main class="login-container">
@@ -31,27 +28,25 @@
           <button type="submit" class="btn">Sign Up</button>
         </form>
       </div>
-
-      <p class="signup-text">
-        Already registered? <a href="staff-login.html">Login here</a>
-      </p>
+      <p class="signup-text">Already registered? <a href="staff-login.html">Login here</a></p>
     </div>
   </main>
 
   <script>
-    document.addEventListener("input", (event) => {
-      if (event.target.tagName === "INPUT") {
-        console.log(`Input Changed → ${event.target.placeholder}: ${event.target.value}`);
-      }
-    });
-
-    document.getElementById("staff-signup-form").addEventListener("submit", (event) => {
-      event.preventDefault();
+    document.getElementById("staff-signup-form").addEventListener("submit", (e) => {
+      e.preventDefault();
       const data = {};
-      new FormData(event.target).forEach((v, k) => data[k] = v);
-      console.log("STAFF SIGNUP FORM SUBMITTED:", data);
-      alert("Form submitted! (Check console for data)");
-      event.target.reset();
+      new FormData(e.target).forEach((v, k) => data[k] = v);
+      const accounts = JSON.parse(localStorage.getItem("staffAccounts")) || [];
+      if (accounts.some(a => a["Institutional Email"] === data["Institutional Email"])) {
+        alert("⚠️ Email already registered!");
+        return;
+      }
+      accounts.push(data);
+      localStorage.setItem("staffAccounts", JSON.stringify(accounts));
+      console.log("✅ STAFF ACCOUNT REGISTERED:", data);
+      alert("Signup successful! You can now log in.");
+      window.location.href = "staff-login.html";
     });
   </script>
 </body>

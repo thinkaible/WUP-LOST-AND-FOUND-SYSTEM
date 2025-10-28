@@ -39,21 +39,30 @@
   </main>
 
   <script>
-    document.addEventListener("input", (event) => {
-      if (event.target.tagName === "INPUT") {
-        console.log(`Input Changed → ${event.target.placeholder}: ${event.target.value}`);
-      }
-    });
-
     document.getElementById("faculty-signup-form").addEventListener("submit", (event) => {
       event.preventDefault();
+      const form = event.target;
       const data = {};
-      new FormData(event.target).forEach((value, key) => {
-        data[key] = value;
-      });
-      console.log("FACULTY SIGNUP FORM SUBMITTED:", data);
-      alert("Form submitted! (Check console for data)");
-      event.target.reset();
+      new FormData(form).forEach((value, key) => data[key] = value);
+
+      // Get existing faculty accounts
+      const accounts = JSON.parse(localStorage.getItem("facultyAccounts")) || [];
+
+      // Check for duplicate email
+      const existing = accounts.find(acc => acc["Institutional Email"] === data["Institutional Email"]);
+      if (existing) {
+        alert("⚠️ This email is already registered!");
+        return;
+      }
+
+      // Save account
+      accounts.push(data);
+      localStorage.setItem("facultyAccounts", JSON.stringify(accounts));
+
+      console.log("✅ FACULTY ACCOUNT REGISTERED:", data);
+      alert("✅ Signup successful! You can now log in.");
+      form.reset();
+      window.location.href = "faculty-login.html";
     });
   </script>
 </body>

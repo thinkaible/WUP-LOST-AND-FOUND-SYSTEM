@@ -44,19 +44,30 @@
       pass.type = pass.type === "password" ? "text" : "password";
     }
 
-    document.addEventListener("input", (event) => {
-      if (event.target.tagName === "INPUT") {
-        console.log(`Input Changed → ${event.target.placeholder}: ${event.target.value}`);
-      }
-    });
-
     document.getElementById("faculty-login-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      const data = {};
-      new FormData(event.target).forEach((v, k) => data[k] = v);
-      console.log("FACULTY LOGIN FORM SUBMITTED:", data);
-      alert("Form submitted! (Check console for data)");
-      event.target.reset();
+      const form = event.target;
+      const email = form["Institutional Email"].value;
+      const password = form["Password"].value;
+
+      // Retrieve accounts
+      const accounts = JSON.parse(localStorage.getItem("facultyAccounts")) || [];
+
+      // Find matching account
+      const user = accounts.find(acc =>
+        acc["Institutional Email"] === email && acc["Password"] === password
+      );
+
+      if (user) {
+        console.log("✅ LOGIN SUCCESSFUL:", user);
+        alert("Welcome back, " + user["Name"] + "!");
+        // Redirect to landing page or dashboard
+        window.location.href = "../landing-page/landing-page.html";
+      } else {
+        alert("❌ Account not found or incorrect password. Please sign up first.");
+      }
+
+      form.reset();
     });
   </script>
 </body>

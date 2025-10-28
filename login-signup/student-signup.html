@@ -9,15 +9,12 @@
 </head>
 <body>
   <nav class="navbar">
-    <a href="../index.html">
-      <img src="../images/logo.png" alt="WUP Logo" class="wup-logo">
-    </a>
-    <button class="menu-btn">&#9776;</button>
+    <a href="../index.html"><img src="../images/logo.png" alt="WUP Logo" class="wup-logo"></a>
   </nav>
 
   <main class="login-container">
     <div class="login-wrapper">
-      <img src="../images/student-logo.png" alt="Graduation Cap" class="login-icon">
+      <img src="../images/student-logo.png" alt="Student Icon" class="login-icon">
       <h2>Student Sign Up</h2>
       <p class="login-description">Kindly provide the required information to register your account.</p>
 
@@ -33,26 +30,25 @@
         </form>
       </div>
 
-      <p class="signup-text">
-        Already registered? <a href="student-login.html">Login here</a>
-      </p>
+      <p class="signup-text">Already registered? <a href="student-login.html">Login here</a></p>
     </div>
   </main>
 
   <script>
-    document.addEventListener("input", (event) => {
-      if (event.target.tagName === "INPUT") {
-        console.log(`Input Changed → ${event.target.placeholder}: ${event.target.value}`);
-      }
-    });
-
-    document.getElementById("student-signup-form").addEventListener("submit", (event) => {
-      event.preventDefault();
+    document.getElementById("student-signup-form").addEventListener("submit", (e) => {
+      e.preventDefault();
       const data = {};
-      new FormData(event.target).forEach((v, k) => data[k] = v);
-      console.log("STUDENT SIGNUP FORM SUBMITTED:", data);
-      alert("Form submitted! (Check console for data)");
-      event.target.reset();
+      new FormData(e.target).forEach((v, k) => data[k] = v);
+      const accounts = JSON.parse(localStorage.getItem("studentAccounts")) || [];
+      if (accounts.some(a => a["Institutional Email"] === data["Institutional Email"])) {
+        alert("⚠️ Email already registered!");
+        return;
+      }
+      accounts.push(data);
+      localStorage.setItem("studentAccounts", JSON.stringify(accounts));
+      console.log("✅ STUDENT ACCOUNT REGISTERED:", data);
+      alert("Signup successful! You can now log in.");
+      window.location.href = "student-login.html";
     });
   </script>
 </body>

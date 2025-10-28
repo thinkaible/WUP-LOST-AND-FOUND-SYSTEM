@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Report Page</title>
-  <link rel="stylesheet" href="report-page.css" />
+  <title>Report Item | WUP Lost & Found</title>
+    <link rel="stylesheet" href="report-page.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  
 </head>
 <body>
-  <!-- navbar -->
+  <!-- Navbar -->
   <header class="navbar">
     <img src="../images/logo.png" alt="WUP Logo" class="nav-logo" onclick="location.href='index.html'">
     <button class="burger-icon">&#9776;</button>
   </header>
 
-  <!-- main container -->
+  <!-- Report Form -->
   <main class="report-container">
     <div class="header">
       <img src="../images/horse.png" alt="Horse Logo" class="horse-logo">
@@ -29,33 +30,29 @@
     <div class="form-card">
       <!-- LOST ITEM FORM -->
       <form id="lost-form" class="form active" onsubmit="handleSubmit(event, 'lost')">
-        <input type="text" placeholder="Item Name" required>
-        <input type="text" placeholder="Color" required>
-        <input type="text" placeholder="Description" required>
-        <input type="text" placeholder="Last Known Location" required>
+        <input type="text" name="itemName" placeholder="Item Name" required>
+        <input type="text" name="color" placeholder="Color" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="text" name="location" placeholder="Last Known Location" required>
         <button type="submit" class="submit-btn">Submit Report</button>
       </form>
 
       <!-- FOUND ITEM FORM -->
       <form id="found-form" class="form" onsubmit="handleSubmit(event, 'found')">
-        <input type="text" placeholder="Item Name" required>
-        <input type="text" placeholder="Color" required>
-        <input type="text" placeholder="Description" required>
-        <input type="text" placeholder="Location Found" required>
-
-        <!-- updated dropdown -->
-        <select required>
+        <input type="text" name="itemName" placeholder="Item Name" required>
+        <input type="text" name="color" placeholder="Color" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="text" name="location" placeholder="Location Found" required>
+        <select name="department" required>
           <option value="" disabled selected>Select Department Surrendered</option>
-          <option>CAMS</option>
-          <option>CBA</option>
-          <option>CAS</option>
-          <option>CHTM</option>
-          <option>CCJE</option>
-          <option>CON</option>
-          <option>CECT</option>
-          <option>CON</option>
+          <option value="CAMS">CAMS</option>
+          <option value="CBA">CBA</option>
+          <option value="CAS">CAS</option>
+          <option value="CHTM">CHTM</option>
+          <option value="CCJE">CCJE</option>
+          <option value="CON">CON</option>
+          <option value="CECT">CECT</option>
         </select>
-
         <button type="submit" class="submit-btn">Submit Report</button>
       </form>
     </div>
@@ -67,33 +64,37 @@
       const foundForm = document.getElementById("found-form");
       const lostTab = document.getElementById("lost-tab");
       const foundTab = document.getElementById("found-tab");
-      const formTitle = document.getElementById("form-title");
 
       if (type === "lost") {
-        lostForm.classList.add("active", "slide-in");
-        foundForm.classList.remove("active", "slide-in");
+        lostForm.classList.add("active");
+        foundForm.classList.remove("active");
         lostTab.classList.add("active");
         foundTab.classList.remove("active");
-        formTitle.textContent = "REPORT ITEM FORM";
       } else {
-        foundForm.classList.add("active", "slide-in");
-        lostForm.classList.remove("active", "slide-in");
+        foundForm.classList.add("active");
+        lostForm.classList.remove("active");
         foundTab.classList.add("active");
         lostTab.classList.remove("active");
-        formTitle.textContent = "LOST ITEM FORM";
       }
     }
 
     function handleSubmit(event, type) {
       event.preventDefault();
-      const inputs = event.target.querySelectorAll("input, select");
-      const data = {};
-      inputs.forEach((input) => {
-        const key = input.placeholder || "Department Surrendered";
-        data[key] = input.value;
-      });
-      console.log(`${type.toUpperCase()} ITEM REPORT:`, data);
-      alert("Form submitted! (Check console for data)");
+      const formData = new FormData(event.target);
+      const report = {};
+      formData.forEach((value, key) => (report[key] = value));
+
+      report.type = type;
+      report.dateSubmitted = new Date().toLocaleString();
+
+      const key = type === "lost" ? "lostItems" : "foundItems";
+      const existingReports = JSON.parse(localStorage.getItem(key)) || [];
+      existingReports.push(report);
+      localStorage.setItem(key, JSON.stringify(existingReports));
+
+      console.log(`${type.toUpperCase()} REPORT SUBMITTED:`, report);
+      alert("✅ Report submitted successfully! Check console for details.");
+
       event.target.reset();
     }
   </script>

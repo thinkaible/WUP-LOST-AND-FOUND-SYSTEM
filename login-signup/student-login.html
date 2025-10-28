@@ -9,10 +9,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <a href="../index.html">
-      <img src="../images/logo.png" alt="WUP Logo" class="wup-logo">
-    </a>
-    <button class="menu-btn">&#9776;</button>
+    <a href="../index.html"><img src="../images/logo.png" alt="WUP Logo" class="wup-logo"></a>
   </nav>
 
   <main class="login-container">
@@ -25,41 +22,34 @@
         <form id="student-login-form">
           <input type="email" name="Institutional Email" placeholder="Institutional Email" required>
           <input type="password" id="password" name="Password" placeholder="Password" required>
-          <label class="show-password">
-            <input type="checkbox" onclick="togglePassword()"> Show Password
-          </label>
+          <label class="show-password"><input type="checkbox" onclick="togglePassword()"> Show Password</label>
           <button type="submit" class="btn">Login</button>
         </form>
       </div>
 
-      <p class="signup-text">
-        Not yet registered? <a href="student-signup.html">Sign Up here</a>
-      </p>
+      <p class="signup-text">Not yet registered? <a href="student-signup.html">Sign Up here</a></p>
     </div>
   </main>
 
   <script>
-    // Toggle password visibility
     function togglePassword() {
       const pass = document.getElementById("password");
       pass.type = pass.type === "password" ? "text" : "password";
     }
 
-    // Log all input changes
-    document.addEventListener("input", (event) => {
-      if (event.target.tagName === "INPUT") {
-        console.log(`Input Changed → ${event.target.placeholder}: ${event.target.value}`);
+    document.getElementById("student-login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = e.target["Institutional Email"].value;
+      const password = e.target["Password"].value;
+      const accounts = JSON.parse(localStorage.getItem("studentAccounts")) || [];
+      const user = accounts.find(a => a["Institutional Email"] === email && a["Password"] === password);
+      if (user) {
+        console.log("✅ STUDENT LOGIN SUCCESS:", user);
+        alert("Welcome, " + user["Name"] + "!");
+        window.location.href = "../landing-page/landing-page.html";
+      } else {
+        alert("❌ Account not found or incorrect password.");
       }
-    });
-
-    // Log submitted data
-    document.getElementById("student-login-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const data = {};
-      new FormData(event.target).forEach((v, k) => data[k] = v);
-      console.log("STUDENT LOGIN FORM SUBMITTED:", data);
-      alert("Form submitted! (Check console for data)");
-      event.target.reset();
     });
   </script>
 </body>
