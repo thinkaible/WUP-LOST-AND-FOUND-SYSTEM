@@ -1,0 +1,73 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f2faff;
+  color: #1d1d1d;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #ffcd38;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.nav-logo {
+  height: 50px;
+  cursor: pointer;
+}
+
+.burger-icon {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Main */
+.details-container {
+  width: 90%;
+  max-width: 500px;
+  margin: 30px auto;
+  text-align: left;
+}
+
+.details-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.details-card {
+  background-color: #008c99;
+  padding: 25px;
+  border-radius: 12px;
+  color: #fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.details-card p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.status-tag {
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.unclaimed {
+  background-color: #ffcd38;
+  color: #111;
+}
+
+.claimed {
+  background-color: #555;
+  color: #fff;
+}
