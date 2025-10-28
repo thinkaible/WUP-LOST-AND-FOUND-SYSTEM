@@ -158,3 +158,18 @@ h2 {
     transform: translateX(0);
   }
 }
+
+.form select {
+  border: 1.5px solid #ffffff;
+  border-radius: 10px;
+  padding: 12px 15px;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.form select option {
+  color: #000;
+}
+

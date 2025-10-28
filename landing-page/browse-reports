@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Browse Reports - WUP</title>
+  <link rel="stylesheet" href="browse-reports.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- navbar (same style as your landing page) -->
+  <header class="navbar">
+    <img src="../images/logo.png" alt="WUP Logo" class="nav-logo" onclick="location.href='landing-page.html'">
+    <button class="burger-icon">&#9776;</button>
+  </header>
+
+  <main class="browse-container">
+    <div class="top-area">
+      <div class="hero">
+        <img src="../images/horse.png" alt="horse" class="hero-img">
+        <h1>LOOKING FOR SOMETHING?</h1>
+      </div>
+
+      <div class="search-row">
+        <button class="report-btn" onclick="location.href='create-report.html'">Report</button>
+        <input id="searchBox" class="search-input" type="search" placeholder="Search (e.g., 'wallet')" />
+        <button class="search-btn" onclick="doSearch()">Search</button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="table-tabs">
+      <button id="lostTab" class="tab active" onclick="showTab('lost')">LOST ITEMS</button>
+      <button id="foundTab" class="tab" onclick="showTab('found')">FOUND ITEMS</button>
+    </div>
+
+    <!-- Table container -->
+    <div class="table-wrap">
+      <!-- LOST TABLE -->
+      <table id="lostTable" class="items-table">
+        <thead>
+          <tr class="table-header">
+            <th>Item Name</th>
+            <th>Faculty Surrendered</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="lostBody">
+          <!-- Sample rows - when you want later, you can generate these from your form -->
+          <tr>
+            <td><a href="item-details.html?name=Artwork%20Wallet&dept=CECT%20Faculty&date=2025-08-12&status=Unclaimed&desc=Black%20artwork%20wallet">Artwork Wallet</a></td>
+            <td>CECT Faculty</td>
+            <td>8/12/25</td>
+            <td>Unclaimed</td>
+          </tr>
+          <tr>
+            <td><a href="item-details.html?name=Owala%20Tumbler&dept=CBA&date=2025-09-31&status=Claimed&desc=Pink%20tumbler">Owala Tumbler</a></td>
+            <td>CBA</td>
+            <td>9/31/25</td>
+            <td>Claimed</td>
+          </tr>
+          <tr>
+            <td><a href="item-details.html?name=Samsung%20(BLACK)&dept=CAMS&date=2025-10-07&status=Unclaimed&desc=Black%20Samsung%20phone">Samsung (BLACK)</a></td>
+            <td>CAMS</td>
+            <td>10/07/25</td>
+            <td>Unclaimed</td>
+          </tr>
+          <tr>
+            <td><a href="item-details.html?name=Umbrella%20(Dark%20Green)&dept=CECT&date=2025-10-19&status=Unclaimed&desc=Dark%20green%20umbrella">Umbrella (Dark Green)</a></td>
+            <td>CECT</td>
+            <td>10/19/25</td>
+            <td>Unclaimed</td>
+          </tr>
+          <tr>
+            <td><a href="item-details.html?name=HOLO%20Wallet&dept=CON&date=2025-10-20&status=Claimed&desc=Holographic%20wallet">HOLO Wallet</a></td>
+            <td>CON</td>
+            <td>10/20/25</td>
+            <td>Claimed</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- FOUND TABLE -->
+      <table id="foundTable" class="items-table hidden">
+        <thead>
+          <tr class="table-header">
+            <th>Item Name</th>
+            <th>Department Surrendered</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="foundBody">
+          <!-- sample found items -->
+          <tr>
+            <td><a href="item-details.html?name=Redmi%20Note%2011&dept=CBA&date=2025-10-12&status=Unclaimed&desc=Gold%20phone%20with%20stickers">Redmi Note 11</a></td>
+            <td>CBA</td>
+            <td>10/12/25</td>
+            <td>Unclaimed</td>
+          </tr>
+          <tr>
+            <td><a href="item-details.html?name=Blue%20Wallet&dept=CECT&date=2025-08-20&status=Claimed&desc=Blue%20wallet">Blue Wallet</a></td>
+            <td>CECT</td>
+            <td>8/20/25</td>
+            <td>Claimed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    // tabs
+    function showTab(which) {
+      document.getElementById('lostTab').classList.toggle('active', which === 'lost');
+      document.getElementById('foundTab').classList.toggle('active', which === 'found');
+      document.getElementById('lostTable').classList.toggle('hidden', which === 'found');
+      document.getElementById('foundTable').classList.toggle('hidden', which === 'lost');
+      // clear search box when switching
+      document.getElementById('searchBox').value = '';
+      filterRows(); // reset
+    }
+
+    // search - filters by Item Name only (first column)
+    function filterRows() {
+      const q = (document.getElementById('searchBox').value || '').trim().toLowerCase();
+      // choose currently visible tbody
+      const showLost = !document.getElementById('lostTable').classList.contains('hidden');
+      const tbody = showLost ? document.getElementById('lostBody') : document.getElementById('foundBody');
+      Array.from(tbody.querySelectorAll('tr')).forEach(row => {
+        const firstCell = row.cells[0];
+        const txt = firstCell ? firstCell.textContent.trim().toLowerCase() : '';
+        row.style.display = txt.indexOf(q) !== -1 ? '' : 'none';
+      });
+    }
+
+    function doSearch() {
+      filterRows();
+    }
+
+    // live search as you type
+    document.getElementById('searchBox').addEventListener('input', filterRows);
+  </script>
+</body>
+</html>

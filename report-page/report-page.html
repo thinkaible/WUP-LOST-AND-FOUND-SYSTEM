@@ -14,7 +14,7 @@
     <button class="burger-icon">&#9776;</button>
   </header>
 
-  <!-- main contiainer -->
+  <!-- main container -->
   <main class="report-container">
     <div class="header">
       <img src="../images/horse.png" alt="Horse Logo" class="horse-logo">
@@ -42,7 +42,20 @@
         <input type="text" placeholder="Color" required>
         <input type="text" placeholder="Description" required>
         <input type="text" placeholder="Location Found" required>
-        <input type="text" placeholder="Department Surrendered" required>
+
+        <!-- updated dropdown -->
+        <select required>
+          <option value="" disabled selected>Select Department Surrendered</option>
+          <option>CAMS</option>
+          <option>CBA</option>
+          <option>CAS</option>
+          <option>CHTM</option>
+          <option>CCJE</option>
+          <option>CON</option>
+          <option>CECT</option>
+          <option>CON</option>
+        </select>
+
         <button type="submit" class="submit-btn">Submit Report</button>
       </form>
     </div>
@@ -56,7 +69,6 @@
       const foundTab = document.getElementById("found-tab");
       const formTitle = document.getElementById("form-title");
 
-      // switch active tab and title
       if (type === "lost") {
         lostForm.classList.add("active", "slide-in");
         foundForm.classList.remove("active", "slide-in");
@@ -74,10 +86,11 @@
 
     function handleSubmit(event, type) {
       event.preventDefault();
-      const inputs = event.target.querySelectorAll("input");
+      const inputs = event.target.querySelectorAll("input, select");
       const data = {};
       inputs.forEach((input) => {
-        data[input.placeholder] = input.value;
+        const key = input.placeholder || "Department Surrendered";
+        data[key] = input.value;
       });
       console.log(`${type.toUpperCase()} ITEM REPORT:`, data);
       alert("Form submitted! (Check console for data)");
