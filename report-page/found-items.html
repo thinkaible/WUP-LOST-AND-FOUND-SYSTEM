@@ -108,14 +108,21 @@
       foundItems.forEach(item => {
         const card = document.createElement("div");
         card.className = "item-card";
+
+        // Get system-generated date
+        const dateReported = item.dateSubmitted || item.date || "Not Available";
+
+        // Default status to "Unclaimed" if none
+        const itemStatus = item.status || "Unclaimed";
+
         card.innerHTML = `
           <h3>${item.itemName}</h3>
           <p><strong>Description:</strong> ${item.description}</p>
           <p><strong>Color:</strong> ${item.color}</p>
           <p><strong>Location Found:</strong> ${item.location}</p>
           <p><strong>Department Surrendered:</strong> ${item.department}</p>
-          <p><strong>Date Surrendered:</strong> ${item.date}</p>
-          <p><strong>Status:</strong> <span class="status">${item.status}</span></p>
+          <p><strong>Date Reported:</strong> ${dateReported}</p>
+          <p><strong>Status:</strong> <span class="status">${itemStatus}</span></p>
         `;
         container.appendChild(card);
       });
